@@ -3,40 +3,53 @@ let results = [null, null, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
 // Your Code Here!
 
-let rollButton = document.getElementById('roll');
-let resultDiv = document.getElementById('result');
-let newGraph = document.getElementById('graph');
+
 
  function rollDie() {
   return Math.floor(Math.random() * 6) + 1;  
 }   
  
 function rollTwoDice() {
-    let rollOne = rollDie();
-    let rollTwo = rollDie();
-    return rollOne + rollTwo;
+    
+    return rollDie() + rollDie();
 }
 
-//need to tell it to create a div for each spot that isnt null and have it add it to the graph
-function renderGraph(){
-    for (let index = 2; index < results.length; index++) {
+let rollButton = document.getElementById('roll');
+// let resetButton = document.getElementById('reset');
+let resultDiv = document.getElementById('result');
+let graph = document.getElementById('graph');
+let roll1000 = document.getElementById('roll1000');
 
-        let newDiv = document.createElement('div');
-       newDiv.append(results[index]);
-       newGraph.append(newDiv);
-        
-      }
-}
+roll1000.addEventListener("click", roll1000Dice);
+rollButton.addEventListener("click", rollDice);
 
-rollButton.addEventListener('click', function () {
-    let rollTwoDiceTotal = rollTwoDice();
-    results[rollTwoDiceTotal] =+1;
+
+function rollDice() {
+    let roll = rollTwoDice();
+    result.innerHTML = `You rolled a ${roll}`;
+    results[roll] += 1;
     console.log(results);
-    resultDiv.innerText = `You rolled a ${rollTwoDiceTotal}`;
+    renderGraph();
+}
 
-    let graphDiv = renderGraph();
-   
-})
+function roll1000Dice(){
+    let roll = 0;
+    for (let index = 1; index <= 1000; index++) {
+        roll = rollTwoDice();
+        results[roll] += 1;
+                
+    }
+    renderGraph();
+    result.innerHTML = `You rolled 1000 times!`;
+}
 
-//create a new function renderGraph(). Have that function loop through the results array. For every value create a div and add it to the graph, adding the number into the div.
 
+
+function renderGraph(){
+    let div = "";
+    for (let index = 2; index < results.length; index +=1){
+        div +=  `<p>You rolled ${index} : ${results[index]} times.</p>`
+        
+    }
+    graph.innerHTML = div;
+}

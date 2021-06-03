@@ -4,6 +4,23 @@ button {
   cursor: pointer;
 }
 
-.graph {
+#graph {
   display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  justify-content: space-around;
+
+  
+}
+
+p {
+  
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+  padding: 5px;
+  background: lightgray;
+  width: 100px;
+  height: 60px
+
 }
